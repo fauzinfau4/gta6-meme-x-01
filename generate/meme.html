@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Leonida General Hospital — Doctor's Note</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1080px;
+    background: #f6efdb;
+    font-family: "Noto Sans", "DejaVu Sans", sans-serif;
+    color: #1c2440;
+    overflow: hidden;
+  }
+  .frame {
+    position: absolute; inset: 26px;
+    border: 4px solid #1c2440;
+    outline: 2px solid #1c2440; outline-offset: 8px;
+    padding: 30px 44px 0 44px;
+    display: flex; flex-direction: column;
+  }
+  /* ---------- header ---------- */
+  .header { display: flex; align-items: center; gap: 22px; }
+  .header .ghost { width: 100px; height: 100px; flex: none; }
+  .header h1 {
+    font-size: 42px; line-height: 1.05; letter-spacing: 1px;
+    font-weight: 900; color: #1c2440;
+  }
+  .header p {
+    font-size: 22px; letter-spacing: 4px; color: #8a2b3c;
+    font-weight: 700; margin-top: 5px;
+  }
+  .rule { height: 3px; background: #1c2440; margin: 18px 0 6px 0; }
+  .rule.thin { height: 1.5px; margin: 6px 0 0 0; }
+  /* ---------- title ---------- */
+  .title { text-align: center; margin-top: 16px; }
+  .title h2 {
+    font-size: 78px; line-height: 1; font-weight: 900;
+    letter-spacing: 4px; color: #a31621;
+  }
+  .title p {
+    font-size: 24px; letter-spacing: 5px; font-weight: 700;
+    color: #1c2440; margin-top: 8px;
+  }
+  /* ---------- fields ---------- */
+  .fields { margin-top: 20px; }
+  .row {
+    display: flex; align-items: baseline; gap: 16px;
+    padding: 10px 0; border-bottom: 2px dotted #9a9178;
+  }
+  .row .label {
+    width: 218px; flex: none;
+    font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #5c5a4a;
+  }
+  .row .value {
+    font-family: "DejaVu Sans Mono", monospace;
+    font-size: 30px; font-weight: 700; color: #141a30; line-height: 1.15;
+  }
+  .row .value .red { color: #a31621; }
+  /* ---------- bottom zone: signature, stamp, ghost ---------- */
+  .bottom { position: relative; flex: 1; margin-top: 6px; min-height: 0; }
+  .sig {
+    position: absolute; left: 0; top: 26px; width: 480px;
+  }
+  .sig .name {
+    font-family: "DejaVu Serif", serif; font-style: italic;
+    font-size: 34px; font-weight: 700; color: #141a30;
+    border-bottom: 2px solid #1c2440; padding-bottom: 4px;
+  }
+  .sig .role { font-size: 21px; letter-spacing: 2px; color: #5c5a4a; margin-top: 8px; }
+  .stamp {
+    position: absolute; left: 30px; top: 128px;
+    border: 5px solid #a31621; border-radius: 10px;
+    color: #a31621; text-align: center;
+    padding: 8px 22px 7px 22px;
+    transform: rotate(-9deg);
+    background: rgba(163, 22, 33, 0.04);
+  }
+  .stamp .big { font-size: 38px; font-weight: 900; letter-spacing: 5px; line-height: 1; }
+  .stamp .small { font-size: 20px; font-weight: 700; letter-spacing: 3px; margin-top: 4px; }
+  .big-ghost {
+    position: absolute; right: 6px; top: 0;
+    width: 205px; height: 205px;
+  }
+  .ghost-caption {
+    position: absolute; right: -24px; top: 204px; width: 280px; text-align: center;
+    font-size: 18px; font-weight: 700; letter-spacing: 2px; color: #5c5a4a;
+    white-space: nowrap;
+  }
+  /* ---------- footer ---------- */
+  .footer {
+    margin: 0 -44px;
+    background: #1c2440; color: #fff;
+    text-align: center; padding: 13px 20px 15px 20px;
+    font-size: 26px; font-weight: 700; line-height: 1.25;
+  }
+  .footer .mag { color: #ff5da2; }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <!-- make.fun ghost: white body, thick black outline, two black
+           four-pointed sparkle eyes, round little hand, magenta coin
+           with a white star. Drawn from scratch for this meme. -->
+      <g id="ghost">
+        <path d="M110 18 C62 18 34 58 34 108 L34 178 Q50 160 66 178 Q82 160 98 178
+                 Q110 166 122 178 Q138 160 154 178 Q170 160 186 178 L186 108
+                 C186 58 158 18 110 18 Z"
+              fill="#ffffff" stroke="#111111" stroke-width="9"
+              stroke-linejoin="round"/>
+        <path d="M82 80 L88 94 L102 100 L88 106 L82 120 L76 106 L62 100 L76 94 Z" fill="#111111"/>
+        <path d="M138 80 L144 94 L158 100 L144 106 L138 120 L132 106 L118 100 L132 94 Z" fill="#111111"/>
+        <circle cx="186" cy="158" r="31" fill="#e6007e" stroke="#111111" stroke-width="6"/>
+        <path d="M186 138 L191 152 L206 152 L194 161 L198 176 L186 167 L174 176
+                 L178 161 L166 152 L181 152 Z" fill="#ffffff"/>
+        <circle cx="158" cy="150" r="13" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+      </g>
+    </defs>
+  </svg>
+
+  <div class="header">
+    <svg class="ghost" viewBox="0 0 220 220"><use href="#ghost"/></svg>
+    <div>
+      <h1>LEONIDA GENERAL<br>HOSPITAL</h1>
+      <p>DEPT. OF VICE CITY FEVER &bull; EST. 2013</p>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+  <div class="rule thin"></div>
+
+  <div class="title">
+    <h2>DOCTOR&rsquo;S NOTE</h2>
+    <p>OFFICIAL SICK-DAY EXCUSE &bull; FORM LC-2013</p>
+  </div>
+
+  <div class="fields">
+    <div class="row"><div class="label">PATIENT</div>
+      <div class="value">ONE VERY PATIENT GAMER</div></div>
+    <div class="row"><div class="label">DIAGNOSIS</div>
+      <div class="value"><span class="red">VICE CITY FEVER</span> &mdash; 13 YRS INCUBATED</div></div>
+    <div class="row"><div class="label">SYMPTOMS</div>
+      <div class="value">REFRESHING ROCKSTAR&rsquo;S FEED HOURLY</div></div>
+    <div class="row"><div class="label">PRESCRIPTION</div>
+      <div class="value">72 HOURS BED REST IN LEONIDA</div></div>
+    <div class="row"><div class="label">DOSAGE</div>
+      <div class="value">ONE (1) GTA VI &middot; MIDNIGHT &middot; MAY 26</div></div>
+    <div class="row"><div class="label">SIDE EFFECTS</div>
+      <div class="value">NO SLEEP &middot; NO SOCIAL LIFE &middot; 214 GB</div></div>
+  </div>
+
+  <div class="bottom">
+    <div class="sig">
+      <div class="name">Dr. Lucia Caminos, MD</div>
+      <div class="role">ATTENDING PHYSICIAN &mdash; VICE CITY</div>
+    </div>
+    <div class="stamp">
+      <div class="big">EXCUSED</div>
+      <div class="small">4 SICK DAYS APPROVED</div>
+    </div>
+    <svg class="big-ghost" viewBox="0 0 220 220"><use href="#ghost"/></svg>
+    <div class="ghost-caption">ON-CALL GHOST &bull; PAID UP</div>
+  </div>
+
+  <div class="footer">
+    Earned by my AI agent on <span class="mag">make.fun</span> &mdash;
+    people &amp; their agents win real money in bounties.
+  </div>
+
+</div>
+</body>
+</html>
